@@ -10,10 +10,7 @@ export const FormPersonalDetails = ({
   values,
   nextStep,
   prevStep,
-  onOccupationChange,
-  onCityChange,
-  onEmailChange,
-  onBioChange,
+  onChange,
 }) => {
   const goAhead = (event) => {
     event.preventDefault()
@@ -36,20 +33,26 @@ export const FormPersonalDetails = ({
       </AppBar>
       <TextField
         placeholder='Occupation'
-        onChange={onOccupationChange}
+        name='occupation'
+        onChange={onChange}
         defaultValue={values.occupation}
+        value={values.occupation}
       />
       <br />
       <TextField
         placeholder='City'
-        onChange={onCityChange}
+        name='city'
+        onChange={onChange}
         defaultValue={values.city}
+        value={values.city}
       />
       <br />
       <TextField
         placeholder='Bio'
-        onChange={onBioChange}
+        name='bio'
+        onChange={onChange}
         defaultValue={values.bio}
+        value={values.bio}
       />
       <br />
       <Button variant='contained' color='primary' onClick={goBack}>

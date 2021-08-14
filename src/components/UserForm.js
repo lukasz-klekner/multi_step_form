@@ -1,17 +1,23 @@
 import { useState } from 'react'
+import { useFormik } from 'formik'
 import { FormUserDetails } from './FormUserDetails'
 import { FormPersonalDetails } from './FormPersonalDetails'
 import { Confirm } from './Confirm'
 import { Success } from './Success'
 
+const initialValues = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  occupation: '',
+  city: '',
+  bio: '',
+}
+
 export const UserForm = () => {
   const [step, setStep] = useState(1)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [occupation, setOccupation] = useState('')
-  const [city, setCity] = useState('')
-  const [bio, setBio] = useState('')
+
+  const { handleChange, values } = useFormik({ initialValues })
 
   // Proceed to the next step
   const nextStep = () => setStep((prevState) => prevState + 1)
@@ -19,34 +25,12 @@ export const UserForm = () => {
   // Go back to previous step
   const prevStep = () => setStep((prevState) => prevState - 1)
 
-  // Handle fields change
-  const handleFirstNameChange = (event) => setFirstName(event.target.value)
-  const handleLastNameChange = (event) => setLastName(event.target.value)
-  const handleEmailChange = (event) => setEmail(event.target.value)
-  const handleOccupationChange = (event) => setOccupation(event.target.value)
-  const handleCityChange = (event) => setCity(event.target.value)
-  const handleBioChange = (event) => setBio(event.target.value)
-
-  const values = {
-    firstName,
-    lastName,
-    email,
-    occupation,
-    city,
-    bio,
-  }
-
   switch (step) {
     case 1:
       return (
         <FormUserDetails
           nextStep={nextStep}
-          onFirstNameChange={handleFirstNameChange}
-          onLastNameChange={handleLastNameChange}
-          onEmailChange={handleEmailChange}
-          onOccupationChange={handleOccupationChange}
-          onCityChange={handleCityChange}
-          onBioChange={handleBioChange}
+          onChange={handleChange}
           values={values}
         />
       )
@@ -55,9 +39,7 @@ export const UserForm = () => {
         <FormPersonalDetails
           nextStep={nextStep}
           prevStep={prevStep}
-          onOccupationChange={handleOccupationChange}
-          onCityChange={handleCityChange}
-          onBioChange={handleBioChange}
+          onChange={handleChange}
           values={values}
         />
       )

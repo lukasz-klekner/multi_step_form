@@ -6,17 +6,12 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 
-export const FormUserDetails = ({
-  values,
-  nextStep,
-  onFirstNameChange,
-  onLastNameChange,
-  onEmailChange,
-}) => {
+export const FormUserDetails = ({ values, nextStep, onChange }) => {
   const goAhead = (event) => {
     event.preventDefault()
     nextStep()
   }
+
   return (
     <>
       <AppBar position='static'>
@@ -29,20 +24,25 @@ export const FormUserDetails = ({
       </AppBar>
       <TextField
         placeholder='First Name'
-        onChange={onFirstNameChange}
-        defaultValue={values.firstName}
+        name='firstName'
+        onChange={onChange}
+        value={values.firstName}
       />
       <br />
       <TextField
         placeholder='Last Name'
-        onChange={onLastNameChange}
+        name='lastName'
+        onChange={onChange}
         defaultValue={values.lastName}
+        value={values.lastName}
       />
       <br />
       <TextField
         placeholder='Email'
-        onChange={onEmailChange}
+        name='email'
+        onChange={onChange}
         defaultValue={values.email}
+        value={values.email}
       />
       <br />
       <Button variant='contained' color='primary' onClick={goAhead}>
